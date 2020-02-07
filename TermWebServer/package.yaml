@@ -1,0 +1,94 @@
+# This YAML file describes your package. Stack will automatically generate a
+# Cabal file when you run `stack build`. See the hpack website for help with
+# this file: <https://github.com/sol/hpack>.
+name: TermWebServer
+version: "0.0.0"
+github: "githubuser/TermWebServer"
+license: MIT
+author: "Author name here"
+maintainer: "Author name here"
+# synopsis: A new Haskeleton package.
+# description: TermWeb2 is a new Haskeleton package.
+# category: Other
+
+extra-source-files:
+  - package.yaml
+  - README.md
+  - stack.yaml
+
+ghc-options: -Wall
+
+dependencies:
+  - base
+  - classy-prelude
+  - pcre-heavy
+  - time-lens
+  - time
+  - aeson
+  - mtl
+  - string-random
+  - data-has
+  - katip
+  - postgresql-simple
+  - postgresql-simple-migration
+  - resource-pool
+  - hedis
+  - amqp
+  - http-types
+  - scotty
+  - cookie
+  - wai
+  - wai-extra
+  - blaze-builder
+  - digestive-functors
+  - digestive-functors-aeson
+  - blaze-html
+  - digestive-functors-blaze
+  - digestive-functors-scotty
+  - wai-middleware-static
+  - warp
+  - http-client
+  - http-client-tls
+  - template-haskell
+  - parsec
+  - containers
+  - safe-exceptions
+default-extensions:
+  - NoImplicitPrelude
+  - OverloadedStrings
+  - QuasiQuotes
+  - GeneralizedNewtypeDeriving
+  - ConstraintKinds
+  - FlexibleContexts
+  - TemplateHaskell
+
+library:
+  source-dirs: src
+
+executables:
+  TermWebServer-exec:
+    source-dirs: src
+    main: Adapter.HTTP.API.Server.Main
+    dependencies:
+      - TermWebServer
+    ghc-options:
+      - -rtsopts
+      - -threaded
+      - -with-rtsopts=-N
+
+tests:
+  TermWebServer-test-suite:
+    source-dirs: test
+    main: Spec.hs
+    dependencies:
+      - hspec
+      - hspec-wai
+      - hspec-wai-json
+      - process
+      - tasty
+      - tasty-hspec
+      - TermWebServer
+    ghc-options:
+      - -rtsopts
+      - -threaded
+      - -with-rtsopts=-N
